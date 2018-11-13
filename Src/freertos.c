@@ -49,12 +49,15 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <string.h>
 #include "stm32f4xx_hal.h"
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "task.h"
 #include "cmsis_os.h"
 #include "bsp_key.h"
+#include "bsp_driver_sd.h"
+#include "fatfs.h"
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -82,6 +85,11 @@
 osThreadId Led0TaskHandle;
 osThreadId KeyScanTaskHandle;
 osThreadId KeyTaskHandle;
+osThreadId FileTaskHandle;
+
+FATFS SDFatFs;  /* File system object for SD card logical drive */
+FIL MyFile;     /* File object */
+char SDPath[4]; /* SD card logical drive path */
 
 
 /* USER CODE END Variables */
@@ -90,6 +98,7 @@ osThreadId KeyTaskHandle;
 /* USER CODE BEGIN FunctionPrototypes */
 void StartLed0Task(void const * argument);
 void StartKeyTask(void const * argument);
+void StartFileTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -127,7 +136,8 @@ void MX_FREERTOS_Init(void) {
   Led0TaskHandle = osThreadCreate(osThread(led0Task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+  osThreadDef(fileTask, StartFileTask, osPriorityNormal, 0, 512);
+  FileTaskHandle = osThreadCreate(osThread(fileTask), NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
@@ -149,7 +159,7 @@ void StartLed0Task(void const * argument)
   for(;;)
   {
 	HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_9 );
-	printf("Led0 test Toggle! \r\n");
+//	printf("Led0 test Toggle! \r\n");
     osDelay(500);
   }
   /* USER CODE END 5 */
@@ -215,6 +225,52 @@ StartKeyTask( void const * argument )
 
 		osDelay(10);
     }
+}
+
+void StartFileTask( void const *argument )
+{
+//	FRESULT res;                                          /* FatFs function common result code */
+	uint32_t bytesread;                     /* File write/read counts */
+	uint8_t rtext[100];                                   /* File read buffer */
+
+	/*##-1- Link the micro SD disk I/O driver ##################################*/
+	if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
+	{
+		/*##-2- Register the file system object to the FatFs module ##############*/
+		if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+		{
+		  /* FatFs Initialization Error */
+		  Error_Handler();
+		}
+		else
+		{
+			/*##-7- Open the text file object with read access ###############*/
+			if(f_open(&MyFile, "STM32.TXT", FA_READ) != FR_OK)
+			{
+			  /* 'STM32.TXT' file Open for read Error */
+			  Error_Handler();
+			}
+			else
+			{
+			  /*##-8- Read data from the text file ###########################*/
+			  f_read(&MyFile, rtext, sizeof(rtext), (UINT*)&bytesread);
+
+			  /*##-9- Close the open text file #############################*/
+			  f_close(&MyFile);
+
+			}
+		}
+	}
+
+	/*##-11- Unlink the RAM disk I/O driver ####################################*/
+	FATFS_UnLinkDriver(SDPath);
+
+    printf((TCHAR *)rtext);
+
+	/* Infinite Loop */
+	for( ;; )
+	{
+	}
 }
 
 /* USER CODE END Application */

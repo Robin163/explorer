@@ -199,7 +199,7 @@ DispOneLine( uint8_t line, uint8_t *str )
 
     /* Send the string character by character on lCD */
     while( ( ( START_COLUMN + refcolumn * refWidth - 1 ) <= END_COLUMN )
-        && ( *str != '\0' ) )
+            && ( *str != '\0' ) )
     {
         /* Display one character on LCD */
         DispOneChar2( refcolumn, line, *str );

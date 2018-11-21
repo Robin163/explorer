@@ -85,10 +85,10 @@ void KeyConfig( void )
  */
 static void KeyConfigValue( void )
 {
-	xQueueKey = xQueueCreate( 10, sizeof(uint8_t) );
-	if( xQueueKey ==0 ){
+    xQueueKey = xQueueCreate( 10, sizeof(uint8_t) );
+    if( xQueueKey ==0 ) {
 
-	}
+    }
 
     /* 给每个按键结构体成员变量赋一组缺省值 */
     for( uint8_t keyCnt = 0; keyCnt < KEY_MAX_COUNT; keyCnt++ )
@@ -152,7 +152,7 @@ static void KeyCheckStatus( uint8_t keyID )
 {
     KeyInfor_T *pNowInfor;
     pNowInfor = &g_keyInfor[keyID];
-	KeyCode_E keyValue = 0;
+    KeyCode_E keyValue = 0;
 
     if( pNowInfor->IsKeyPressFunc() )
     {
@@ -172,8 +172,8 @@ static void KeyCheckStatus( uint8_t keyID )
                 /* send key is pressed signal */
 
 //				  HAL_GPIO_TogglePin( GPIOD, GPIO_PIN_10);
-				keyValue = 3*keyID + 1;
-				xQueueSend( xQueueKey, &(keyValue), 100 );
+                keyValue = 3*keyID + 1;
+                xQueueSend( xQueueKey, &(keyValue), 100 );
             }
 
             if( pNowInfor->longTime > 0 )
@@ -184,8 +184,8 @@ static void KeyCheckStatus( uint8_t keyID )
                     if( ++pNowInfor->longCnt == pNowInfor->longTime )
                     {
                         /* put key Value to buffer */
-						keyValue = 3*keyID + 3;
-						xQueueSend( xQueueKey, &(keyValue), 100 );
+                        keyValue = 3*keyID + 3;
+                        xQueueSend( xQueueKey, &(keyValue), 100 );
 //						xQueueSend( xQueueKey, &(3*keyID +3), 100 );
                     }
                 }
@@ -218,8 +218,8 @@ static void KeyCheckStatus( uint8_t keyID )
             {
                 pNowInfor->status = 0;
                 /* send key release signal */
-				keyValue = 3*keyID + 2;
-				xQueueSend( xQueueKey, &(keyValue), 100 );
+                keyValue = 3*keyID + 2;
+                xQueueSend( xQueueKey, &(keyValue), 100 );
             }
         }
 
@@ -239,17 +239,17 @@ static void KeyCheckStatus( uint8_t keyID )
 void StartKeyScanTask(void const * argument)
 {
 
-  /* USER CODE BEGIN StartDefaultTask */
-  /* Infinite loop */
-  for(;;)
-  {
-    for( uint8_t keyCnt = 0; keyCnt < KEY_MAX_COUNT; keyCnt++ )
+    /* USER CODE BEGIN StartDefaultTask */
+    /* Infinite loop */
+    for(;;)
     {
-        KeyCheckStatus( keyCnt );
+        for( uint8_t keyCnt = 0; keyCnt < KEY_MAX_COUNT; keyCnt++ )
+        {
+            KeyCheckStatus( keyCnt );
+        }
+        osDelay(10);
     }
-    osDelay(10);
-  }
-  /* USER CODE END StartDefaultTask */
+    /* USER CODE END StartDefaultTask */
 }
 
 /** @} */

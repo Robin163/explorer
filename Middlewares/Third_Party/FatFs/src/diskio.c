@@ -74,13 +74,13 @@ extern Disk_drvTypeDef  disk;
   * @retval DSTATUS: Operation status
   */
 DSTATUS disk_status (
-	BYTE pdrv		/* Physical drive number to identify the drive */
+    BYTE pdrv		/* Physical drive number to identify the drive */
 )
 {
-  DSTATUS stat;
+    DSTATUS stat;
 
-  stat = disk.drv[pdrv]->disk_status(disk.lun[pdrv]);
-  return stat;
+    stat = disk.drv[pdrv]->disk_status(disk.lun[pdrv]);
+    return stat;
 }
 
 /**
@@ -89,17 +89,17 @@ DSTATUS disk_status (
   * @retval DSTATUS: Operation status
   */
 DSTATUS disk_initialize (
-	BYTE pdrv				/* Physical drive nmuber to identify the drive */
+    BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
 {
-  DSTATUS stat = RES_OK;
+    DSTATUS stat = RES_OK;
 
-  if(disk.is_initialized[pdrv] == 0)
-  {
-    disk.is_initialized[pdrv] = 1;
-    stat = disk.drv[pdrv]->disk_initialize(disk.lun[pdrv]);
-  }
-  return stat;
+    if(disk.is_initialized[pdrv] == 0)
+    {
+        disk.is_initialized[pdrv] = 1;
+        stat = disk.drv[pdrv]->disk_initialize(disk.lun[pdrv]);
+    }
+    return stat;
 }
 
 /**
@@ -111,16 +111,16 @@ DSTATUS disk_initialize (
   * @retval DRESULT: Operation result
   */
 DRESULT disk_read (
-	BYTE pdrv,		/* Physical drive nmuber to identify the drive */
-	BYTE *buff,		/* Data buffer to store read data */
-	DWORD sector,	        /* Sector address in LBA */
-	UINT count		/* Number of sectors to read */
+    BYTE pdrv,		/* Physical drive nmuber to identify the drive */
+    BYTE *buff,		/* Data buffer to store read data */
+    DWORD sector,	        /* Sector address in LBA */
+    UINT count		/* Number of sectors to read */
 )
 {
-  DRESULT res;
+    DRESULT res;
 
-  res = disk.drv[pdrv]->disk_read(disk.lun[pdrv], buff, sector, count);
-  return res;
+    res = disk.drv[pdrv]->disk_read(disk.lun[pdrv], buff, sector, count);
+    return res;
 }
 
 /**
@@ -133,16 +133,16 @@ DRESULT disk_read (
   */
 #if _USE_WRITE == 1
 DRESULT disk_write (
-	BYTE pdrv,		/* Physical drive nmuber to identify the drive */
-	const BYTE *buff,	/* Data to be written */
-	DWORD sector,		/* Sector address in LBA */
-	UINT count        	/* Number of sectors to write */
+    BYTE pdrv,		/* Physical drive nmuber to identify the drive */
+    const BYTE *buff,	/* Data to be written */
+    DWORD sector,		/* Sector address in LBA */
+    UINT count        	/* Number of sectors to write */
 )
 {
-  DRESULT res;
+    DRESULT res;
 
-  res = disk.drv[pdrv]->disk_write(disk.lun[pdrv], buff, sector, count);
-  return res;
+    res = disk.drv[pdrv]->disk_write(disk.lun[pdrv], buff, sector, count);
+    return res;
 }
 #endif /* _USE_WRITE == 1 */
 
@@ -155,15 +155,15 @@ DRESULT disk_write (
   */
 #if _USE_IOCTL == 1
 DRESULT disk_ioctl (
-	BYTE pdrv,		/* Physical drive nmuber (0..) */
-	BYTE cmd,		/* Control code */
-	void *buff		/* Buffer to send/receive control data */
+    BYTE pdrv,		/* Physical drive nmuber (0..) */
+    BYTE cmd,		/* Control code */
+    void *buff		/* Buffer to send/receive control data */
 )
 {
-  DRESULT res;
+    DRESULT res;
 
-  res = disk.drv[pdrv]->disk_ioctl(disk.lun[pdrv], cmd, buff);
-  return res;
+    res = disk.drv[pdrv]->disk_ioctl(disk.lun[pdrv], cmd, buff);
+    return res;
 }
 #endif /* _USE_IOCTL == 1 */
 
@@ -174,7 +174,7 @@ DRESULT disk_ioctl (
   */
 __weak DWORD get_fattime (void)
 {
-  return 0;
+    return 0;
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

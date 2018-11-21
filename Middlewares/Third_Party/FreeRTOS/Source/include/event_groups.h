@@ -71,7 +71,7 @@
 #define EVENT_GROUPS_H
 
 #ifndef INC_FREERTOS_H
-	#error "include FreeRTOS.h" must appear in source files before "include event_groups.h"
+#error "include FreeRTOS.h" must appear in source files before "include event_groups.h"
 #endif
 
 /* FreeRTOS includes. */
@@ -446,9 +446,9 @@ PRIVILEGED_FUNCTION EventBits_t xEventGroupClearBits( EventGroupHandle_t xEventG
  * \ingroup EventGroup
  */
 #if( configUSE_TRACE_FACILITY == 1 )
-	PRIVILEGED_FUNCTION BaseType_t xEventGroupClearBitsFromISR( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet );
+PRIVILEGED_FUNCTION BaseType_t xEventGroupClearBitsFromISR( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet );
 #else
-	#define xEventGroupClearBitsFromISR( xEventGroup, uxBitsToClear ) xTimerPendFunctionCallFromISR( vEventGroupClearBitsCallback, ( void * ) xEventGroup, ( uint32_t ) uxBitsToClear, NULL )
+#define xEventGroupClearBitsFromISR( xEventGroup, uxBitsToClear ) xTimerPendFunctionCallFromISR( vEventGroupClearBitsCallback, ( void * ) xEventGroup, ( uint32_t ) uxBitsToClear, NULL )
 #endif
 
 /**
@@ -598,9 +598,9 @@ PRIVILEGED_FUNCTION EventBits_t xEventGroupSetBits( EventGroupHandle_t xEventGro
  * \ingroup EventGroup
  */
 #if( configUSE_TRACE_FACILITY == 1 )
-	PRIVILEGED_FUNCTION BaseType_t xEventGroupSetBitsFromISR( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet, BaseType_t *pxHigherPriorityTaskWoken );
+PRIVILEGED_FUNCTION BaseType_t xEventGroupSetBitsFromISR( EventGroupHandle_t xEventGroup, const EventBits_t uxBitsToSet, BaseType_t *pxHigherPriorityTaskWoken );
 #else
-	#define xEventGroupSetBitsFromISR( xEventGroup, uxBitsToSet, pxHigherPriorityTaskWoken ) xTimerPendFunctionCallFromISR( vEventGroupSetBitsCallback, ( void * ) xEventGroup, ( uint32_t ) uxBitsToSet, pxHigherPriorityTaskWoken )
+#define xEventGroupSetBitsFromISR( xEventGroup, uxBitsToSet, pxHigherPriorityTaskWoken ) xTimerPendFunctionCallFromISR( vEventGroupSetBitsCallback, ( void * ) xEventGroup, ( uint32_t ) uxBitsToSet, pxHigherPriorityTaskWoken )
 #endif
 
 /**
@@ -785,7 +785,7 @@ PRIVILEGED_FUNCTION void vEventGroupClearBitsCallback( void *pvEventGroup, const
 
 
 #if (configUSE_TRACE_FACILITY == 1)
-	PRIVILEGED_FUNCTION UBaseType_t uxEventGroupGetNumber( void* xEventGroup );
+PRIVILEGED_FUNCTION UBaseType_t uxEventGroupGetNumber( void* xEventGroup );
 #endif
 
 #ifdef __cplusplus

@@ -21,9 +21,9 @@
  * Version 1.02
  *    Control functions for short timeouts in microsecond resolution:
  *    Added: osKernelSysTick, osKernelSysTickFrequency, osKernelSysTickMicroSec
- *    Removed: osSignalGet 
- *    
- *  
+ *    Removed: osSignalGet
+ *
+ *
  *----------------------------------------------------------------------------
  *
  * Portions Copyright © 2016 STMicroelectronics International N.V. All rights reserved.
@@ -53,51 +53,51 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *---------------------------------------------------------------------------*/
 
- /**
-  ******************************************************************************
-  * @file    cmsis_os.h
-  * @author  MCD Application Team
-  * @date    13-July-2017
-  * @brief   Header of cmsis_os.c
-  *          A new set of APIs are added in addition to existing ones, these APIs 
-  *          are specific to FreeRTOS.
-  ******************************************************************************
-  * @attention
-  *
-  * Redistribution and use in source and binary forms, with or without 
-  * modification, are permitted, provided that the following conditions are met:
-  *
-  * 1. Redistribution of source code must retain the above copyright notice, 
-  *    this list of conditions and the following disclaimer.
-  * 2. Redistributions in binary form must reproduce the above copyright notice,
-  *    this list of conditions and the following disclaimer in the documentation
-  *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
-  *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
-  *    software, must execute solely and exclusively on microcontroller or
-  *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
-  *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
-  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */
-	
+/**
+ ******************************************************************************
+ * @file    cmsis_os.h
+ * @author  MCD Application Team
+ * @date    13-July-2017
+ * @brief   Header of cmsis_os.c
+ *          A new set of APIs are added in addition to existing ones, these APIs
+ *          are specific to FreeRTOS.
+ ******************************************************************************
+ * @attention
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted, provided that the following conditions are met:
+ *
+ * 1. Redistribution of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ * 3. Neither the name of STMicroelectronics nor the names of other
+ *    contributors to this software may be used to endorse or promote products
+ *    derived from this software without specific written permission.
+ * 4. This software, including modifications and/or derivative works of this
+ *    software, must execute solely and exclusively on microcontroller or
+ *    microprocessor devices manufactured by or for STMicroelectronics.
+ * 5. Redistribution and use of this software other than as permitted under
+ *    this license is void and will automatically terminate your rights under
+ *    this license.
+ *
+ * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+ * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+ * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ ******************************************************************************
+ */
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
@@ -215,14 +215,14 @@ extern "C"
 /// Priority used for thread control.
 /// \note MUST REMAIN UNCHANGED: \b osPriority shall be consistent in every CMSIS-RTOS.
 typedef enum  {
-  osPriorityIdle          = -3,          ///< priority: idle (lowest)
-  osPriorityLow           = -2,          ///< priority: low
-  osPriorityBelowNormal   = -1,          ///< priority: below normal
-  osPriorityNormal        =  0,          ///< priority: normal (default)
-  osPriorityAboveNormal   = +1,          ///< priority: above normal
-  osPriorityHigh          = +2,          ///< priority: high
-  osPriorityRealtime      = +3,          ///< priority: realtime (highest)
-  osPriorityError         =  0x84        ///< system cannot determine priority or thread has illegal priority
+    osPriorityIdle          = -3,          ///< priority: idle (lowest)
+    osPriorityLow           = -2,          ///< priority: low
+    osPriorityBelowNormal   = -1,          ///< priority: below normal
+    osPriorityNormal        =  0,          ///< priority: normal (default)
+    osPriorityAboveNormal   = +1,          ///< priority: above normal
+    osPriorityHigh          = +2,          ///< priority: high
+    osPriorityRealtime      = +3,          ///< priority: realtime (highest)
+    osPriorityError         =  0x84        ///< system cannot determine priority or thread has illegal priority
 } osPriority;
 
 /// Timeout value.
@@ -232,40 +232,40 @@ typedef enum  {
 /// Status code values returned by CMSIS-RTOS functions.
 /// \note MUST REMAIN UNCHANGED: \b osStatus shall be consistent in every CMSIS-RTOS.
 typedef enum  {
-  osOK                    =     0,       ///< function completed; no error or event occurred.
-  osEventSignal           =  0x08,       ///< function completed; signal event occurred.
-  osEventMessage          =  0x10,       ///< function completed; message event occurred.
-  osEventMail             =  0x20,       ///< function completed; mail event occurred.
-  osEventTimeout          =  0x40,       ///< function completed; timeout occurred.
-  osErrorParameter        =  0x80,       ///< parameter error: a mandatory parameter was missing or specified an incorrect object.
-  osErrorResource         =  0x81,       ///< resource not available: a specified resource was not available.
-  osErrorTimeoutResource  =  0xC1,       ///< resource not available within given time: a specified resource was not available within the timeout period.
-  osErrorISR              =  0x82,       ///< not allowed in ISR context: the function cannot be called from interrupt service routines.
-  osErrorISRRecursive     =  0x83,       ///< function called multiple times from ISR with same object.
-  osErrorPriority         =  0x84,       ///< system cannot determine priority or thread has illegal priority.
-  osErrorNoMemory         =  0x85,       ///< system is out of memory: it was impossible to allocate or reserve memory for the operation.
-  osErrorValue            =  0x86,       ///< value of a parameter is out of range.
-  osErrorOS               =  0xFF,       ///< unspecified RTOS error: run-time error but no other error message fits.
-  os_status_reserved      =  0x7FFFFFFF  ///< prevent from enum down-size compiler optimization.
+    osOK                    =     0,       ///< function completed; no error or event occurred.
+    osEventSignal           =  0x08,       ///< function completed; signal event occurred.
+    osEventMessage          =  0x10,       ///< function completed; message event occurred.
+    osEventMail             =  0x20,       ///< function completed; mail event occurred.
+    osEventTimeout          =  0x40,       ///< function completed; timeout occurred.
+    osErrorParameter        =  0x80,       ///< parameter error: a mandatory parameter was missing or specified an incorrect object.
+    osErrorResource         =  0x81,       ///< resource not available: a specified resource was not available.
+    osErrorTimeoutResource  =  0xC1,       ///< resource not available within given time: a specified resource was not available within the timeout period.
+    osErrorISR              =  0x82,       ///< not allowed in ISR context: the function cannot be called from interrupt service routines.
+    osErrorISRRecursive     =  0x83,       ///< function called multiple times from ISR with same object.
+    osErrorPriority         =  0x84,       ///< system cannot determine priority or thread has illegal priority.
+    osErrorNoMemory         =  0x85,       ///< system is out of memory: it was impossible to allocate or reserve memory for the operation.
+    osErrorValue            =  0x86,       ///< value of a parameter is out of range.
+    osErrorOS               =  0xFF,       ///< unspecified RTOS error: run-time error but no other error message fits.
+    os_status_reserved      =  0x7FFFFFFF  ///< prevent from enum down-size compiler optimization.
 } osStatus;
 
 #if ( INCLUDE_eTaskGetState == 1 )
 /* Thread state returned by osThreadGetState */
 typedef enum {
-	osThreadRunning   = 0x0,	      /* A thread is querying the state of itself, so must be running. */
-	osThreadReady     = 0x1 ,			        /* The thread being queried is in a read or pending ready list. */
-	osThreadBlocked   = 0x2,		        /* The thread being queried is in the Blocked state. */
-	osThreadSuspended = 0x3,	      /* The thread being queried is in the Suspended state, or is in the Blocked state with an infinite time out. */
-	osThreadDeleted   = 0x4,		          /* The thread being queried has been deleted, but its TCB has not yet been freed. */   
-  osThreadError     = 0x7FFFFFFF
+    osThreadRunning   = 0x0,	      /* A thread is querying the state of itself, so must be running. */
+    osThreadReady     = 0x1,			         /* The thread being queried is in a read or pending ready list. */
+    osThreadBlocked   = 0x2,		        /* The thread being queried is in the Blocked state. */
+    osThreadSuspended = 0x3,	      /* The thread being queried is in the Suspended state, or is in the Blocked state with an infinite time out. */
+    osThreadDeleted   = 0x4,		          /* The thread being queried has been deleted, but its TCB has not yet been freed. */
+    osThreadError     = 0x7FFFFFFF
 } osThreadState;
 #endif /* INCLUDE_eTaskGetState */
 
 /// Timer type value for the timer definition.
 /// \note MUST REMAIN UNCHANGED: \b os_timer_type shall be consistent in every CMSIS-RTOS.
 typedef enum  {
-  osTimerOnce             =     0,       ///< one-shot timer
-  osTimerPeriodic         =     1        ///< repeating timer
+    osTimerOnce             =     0,       ///< one-shot timer
+    osTimerPeriodic         =     1        ///< repeating timer
 } os_timer_type;
 
 /// Entry point of a thread.
@@ -311,7 +311,7 @@ typedef struct os_mailQ_cb *osMailQId;
 
 typedef StaticTask_t               osStaticThreadDef_t;
 typedef StaticTimer_t              osStaticTimerDef_t;
-typedef StaticSemaphore_t          osStaticMutexDef_t;         
+typedef StaticSemaphore_t          osStaticMutexDef_t;
 typedef StaticSemaphore_t          osStaticSemaphoreDef_t;
 typedef StaticQueue_t              osStaticMessageQDef_t;
 
@@ -323,86 +323,86 @@ typedef StaticQueue_t              osStaticMessageQDef_t;
 /// Thread Definition structure contains startup information of a thread.
 /// \note CAN BE CHANGED: \b os_thread_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_thread_def  {
-  char                   *name;        ///< Thread name 
-  os_pthread             pthread;      ///< start address of thread function
-  osPriority             tpriority;    ///< initial thread priority
-  uint32_t               instances;    ///< maximum number of instances of that thread function
-  uint32_t               stacksize;    ///< stack size requirements in bytes; 0 is default stack size
+    char                   *name;        ///< Thread name
+    os_pthread             pthread;      ///< start address of thread function
+    osPriority             tpriority;    ///< initial thread priority
+    uint32_t               instances;    ///< maximum number of instances of that thread function
+    uint32_t               stacksize;    ///< stack size requirements in bytes; 0 is default stack size
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-  uint32_t               *buffer;      ///< stack buffer for static allocation; NULL for dynamic allocation
-  osStaticThreadDef_t    *controlblock;     ///< control block to hold thread's data for static allocation; NULL for dynamic allocation
+    uint32_t               *buffer;      ///< stack buffer for static allocation; NULL for dynamic allocation
+    osStaticThreadDef_t    *controlblock;     ///< control block to hold thread's data for static allocation; NULL for dynamic allocation
 #endif
 } osThreadDef_t;
 
 /// Timer Definition structure contains timer parameters.
 /// \note CAN BE CHANGED: \b os_timer_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_timer_def  {
-  os_ptimer                 ptimer;    ///< start address of a timer function
+    os_ptimer                 ptimer;    ///< start address of a timer function
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-  osStaticTimerDef_t        *controlblock;      ///< control block to hold timer's data for static allocation; NULL for dynamic allocation
+    osStaticTimerDef_t        *controlblock;      ///< control block to hold timer's data for static allocation; NULL for dynamic allocation
 #endif
 } osTimerDef_t;
 
 /// Mutex Definition structure contains setup information for a mutex.
 /// \note CAN BE CHANGED: \b os_mutex_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_mutex_def  {
-  uint32_t                   dummy;    ///< dummy value.
+    uint32_t                   dummy;    ///< dummy value.
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-  osStaticMutexDef_t         *controlblock;      ///< control block for static allocation; NULL for dynamic allocation
+    osStaticMutexDef_t         *controlblock;      ///< control block for static allocation; NULL for dynamic allocation
 #endif
 } osMutexDef_t;
 
 /// Semaphore Definition structure contains setup information for a semaphore.
 /// \note CAN BE CHANGED: \b os_semaphore_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_semaphore_def  {
-  uint32_t                   dummy;    ///< dummy value.
+    uint32_t                   dummy;    ///< dummy value.
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-  osStaticSemaphoreDef_t     *controlblock;      ///< control block for static allocation; NULL for dynamic allocation
+    osStaticSemaphoreDef_t     *controlblock;      ///< control block for static allocation; NULL for dynamic allocation
 #endif
 } osSemaphoreDef_t;
 
 /// Definition structure for memory block allocation.
 /// \note CAN BE CHANGED: \b os_pool_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_pool_def  {
-  uint32_t                 pool_sz;    ///< number of items (elements) in the pool
-  uint32_t                 item_sz;    ///< size of an item
-  void                       *pool;    ///< pointer to memory for pool
+    uint32_t                 pool_sz;    ///< number of items (elements) in the pool
+    uint32_t                 item_sz;    ///< size of an item
+    void                       *pool;    ///< pointer to memory for pool
 } osPoolDef_t;
 
 /// Definition structure for message queue.
 /// \note CAN BE CHANGED: \b os_messageQ_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_messageQ_def  {
-  uint32_t                queue_sz;    ///< number of elements in the queue
-  uint32_t                item_sz;    ///< size of an item
+    uint32_t                queue_sz;    ///< number of elements in the queue
+    uint32_t                item_sz;    ///< size of an item
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-  uint8_t                 *buffer;      ///< buffer for static allocation; NULL for dynamic allocation
-  osStaticMessageQDef_t   *controlblock;     ///< control block to hold queue's data for static allocation; NULL for dynamic allocation
+    uint8_t                 *buffer;      ///< buffer for static allocation; NULL for dynamic allocation
+    osStaticMessageQDef_t   *controlblock;     ///< control block to hold queue's data for static allocation; NULL for dynamic allocation
 #endif
-  //void                       *pool;    ///< memory array for messages
+    //void                       *pool;    ///< memory array for messages
 } osMessageQDef_t;
 
 /// Definition structure for mail queue.
 /// \note CAN BE CHANGED: \b os_mailQ_def is implementation specific in every CMSIS-RTOS.
 typedef struct os_mailQ_def  {
-  uint32_t                queue_sz;    ///< number of elements in the queue
-  uint32_t                 item_sz;    ///< size of an item
-  struct os_mailQ_cb **cb;
+    uint32_t                queue_sz;    ///< number of elements in the queue
+    uint32_t                 item_sz;    ///< size of an item
+    struct os_mailQ_cb **cb;
 } osMailQDef_t;
 
 /// Event structure contains detailed information about an event.
 /// \note MUST REMAIN UNCHANGED: \b os_event shall be consistent in every CMSIS-RTOS.
 ///       However the struct may be extended at the end.
 typedef struct  {
-  osStatus                 status;     ///< status code: event or error information
-  union  {
-    uint32_t                    v;     ///< message as 32-bit value
-    void                       *p;     ///< message or mail as void pointer
-    int32_t               signals;     ///< signal flags
-  } value;                             ///< event value
-  union  {
-    osMailQId             mail_id;     ///< mail id obtained by \ref osMailCreate
-    osMessageQId       message_id;     ///< message id obtained by \ref osMessageCreate
-  } def;                               ///< event definition
+    osStatus                 status;     ///< status code: event or error information
+    union  {
+        uint32_t                    v;     ///< message as 32-bit value
+        void                       *p;     ///< message or mail as void pointer
+        int32_t               signals;     ///< signal flags
+    } value;                             ///< event value
+    union  {
+        osMailQId             mail_id;     ///< mail id obtained by \ref osMailCreate
+        osMessageQId       message_id;     ///< message id obtained by \ref osMessageCreate
+    } def;                               ///< event definition
 } osEvent;
 
 
@@ -425,9 +425,9 @@ int32_t osKernelRunning(void);
 
 #if (defined (osFeature_SysTick)  &&  (osFeature_SysTick != 0))     // System Timer available
 
-/// Get the RTOS kernel system timer counter 
+/// Get the RTOS kernel system timer counter
 /// \note MUST REMAIN UNCHANGED: \b osKernelSysTick shall be consistent in every CMSIS-RTOS.
-/// \return RTOS kernel system timer as 32-bit value 
+/// \return RTOS kernel system timer as 32-bit value
 uint32_t osKernelSysTick (void);
 
 /// The RTOS kernel system timer frequency in Hz
@@ -544,7 +544,7 @@ osEvent osWait (uint32_t millisec);
 extern const osTimerDef_t os_timer_def_##name
 #else                            // define the object
 
-#if( configSUPPORT_STATIC_ALLOCATION == 1 ) 
+#if( configSUPPORT_STATIC_ALLOCATION == 1 )
 #define osTimerDef(name, function)  \
 const osTimerDef_t os_timer_def_##name = \
 { (function), NULL }
@@ -982,7 +982,7 @@ osStatus osThreadResumeAll (void);
 
 /**
 * @brief  Delay a task until a specified time
-* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the 
+* @param   PreviousWakeTime   Pointer to a variable that holds the time at which the
 *          task was last unblocked. PreviousWakeTime must be initialised with the current time
 *          prior to its first use (PreviousWakeTime = osKernelSysTick() )
 * @param   millisec    time delay value
@@ -992,13 +992,13 @@ osStatus osDelayUntil (uint32_t *PreviousWakeTime, uint32_t millisec);
 
 /**
 * @brief   Abort the delay for a specific thread
-* @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId   
+* @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId
 * @retval  status code that indicates the execution status of the function.
 */
 osStatus osAbortDelay(osThreadId thread_id);
 
 /**
-* @brief   Lists all the current threads, along with their current state 
+* @brief   Lists all the current threads, along with their current state
 *          and stack usage high water mark.
 * @param   buffer   A buffer into which the above mentioned details
 *          will be written

@@ -72,7 +72,7 @@
 #define QUEUE_H
 
 #ifndef INC_FREERTOS_H
-#error "include FreeRTOS.h" must appear in source files before "include queue.h"
+	#error "include FreeRTOS.h" must appear in source files before "include queue.h"
 #endif
 
 #ifdef __cplusplus
@@ -183,7 +183,7 @@ typedef void * QueueSetMemberHandle_t;
  * \ingroup QueueManagement
  */
 #if( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
-#define xQueueCreate( uxQueueLength, uxItemSize ) xQueueGenericCreate( ( uxQueueLength ), ( uxItemSize ), ( queueQUEUE_TYPE_BASE ) )
+	#define xQueueCreate( uxQueueLength, uxItemSize ) xQueueGenericCreate( ( uxQueueLength ), ( uxItemSize ), ( queueQUEUE_TYPE_BASE ) )
 #endif
 
 /**
@@ -269,7 +269,7 @@ typedef void * QueueSetMemberHandle_t;
  * \ingroup QueueManagement
  */
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-#define xQueueCreateStatic( uxQueueLength, uxItemSize, pucQueueStorage, pxQueueBuffer ) xQueueGenericCreateStatic( ( uxQueueLength ), ( uxItemSize ), ( pucQueueStorage ), ( pxQueueBuffer ), ( queueQUEUE_TYPE_BASE ) )
+	#define xQueueCreateStatic( uxQueueLength, uxItemSize, pucQueueStorage, pxQueueBuffer ) xQueueGenericCreateStatic( ( uxQueueLength ), ( uxItemSize ), ( pucQueueStorage ), ( pxQueueBuffer ), ( queueQUEUE_TYPE_BASE ) )
 #endif /* configSUPPORT_STATIC_ALLOCATION */
 
 /**
@@ -1598,7 +1598,7 @@ PRIVILEGED_FUNCTION BaseType_t xQueueGiveMutexRecursive( QueueHandle_t pxMutex )
  * preferably in ROM/Flash), not on the stack.
  */
 #if( configQUEUE_REGISTRY_SIZE > 0 )
-PRIVILEGED_FUNCTION void vQueueAddToRegistry( QueueHandle_t xQueue, const char *pcName ); /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+	PRIVILEGED_FUNCTION void vQueueAddToRegistry( QueueHandle_t xQueue, const char *pcName ); /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 #endif
 
 /*
@@ -1612,7 +1612,7 @@ PRIVILEGED_FUNCTION void vQueueAddToRegistry( QueueHandle_t xQueue, const char *
  * @param xQueue The handle of the queue being removed from the registry.
  */
 #if( configQUEUE_REGISTRY_SIZE > 0 )
-PRIVILEGED_FUNCTION void vQueueUnregisterQueue( QueueHandle_t xQueue );
+	PRIVILEGED_FUNCTION void vQueueUnregisterQueue( QueueHandle_t xQueue );
 #endif
 
 /*
@@ -1627,7 +1627,7 @@ PRIVILEGED_FUNCTION void vQueueUnregisterQueue( QueueHandle_t xQueue );
  * returned.
  */
 #if( configQUEUE_REGISTRY_SIZE > 0 )
-PRIVILEGED_FUNCTION const char *pcQueueGetName( QueueHandle_t xQueue ); /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+	PRIVILEGED_FUNCTION const char *pcQueueGetName( QueueHandle_t xQueue ); /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 #endif
 
 /*
@@ -1636,7 +1636,7 @@ PRIVILEGED_FUNCTION const char *pcQueueGetName( QueueHandle_t xQueue ); /*lint !
  * RTOS objects that use the queue structure as their base.
  */
 #if( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
-PRIVILEGED_FUNCTION QueueHandle_t xQueueGenericCreate( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, const uint8_t ucQueueType );
+	PRIVILEGED_FUNCTION QueueHandle_t xQueueGenericCreate( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, const uint8_t ucQueueType );
 #endif
 
 /*
@@ -1645,7 +1645,7 @@ PRIVILEGED_FUNCTION QueueHandle_t xQueueGenericCreate( const UBaseType_t uxQueue
  * RTOS objects that use the queue structure as their base.
  */
 #if( configSUPPORT_STATIC_ALLOCATION == 1 )
-PRIVILEGED_FUNCTION QueueHandle_t xQueueGenericCreateStatic( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, uint8_t *pucQueueStorage, StaticQueue_t *pxStaticQueue, const uint8_t ucQueueType );
+	PRIVILEGED_FUNCTION QueueHandle_t xQueueGenericCreateStatic( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, uint8_t *pucQueueStorage, StaticQueue_t *pxStaticQueue, const uint8_t ucQueueType );
 #endif
 
 /*

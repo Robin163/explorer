@@ -42,11 +42,12 @@ Src/stm32f4xx_hal_msp.c \
 bsp/freertos/led/bsp_led.c \
 bsp/freertos/key/bsp_key.c \
 bsp/freertos/uart/syscalls.c \
-bsp/freertos/uart/bsp_uart.c \
+bsp/freertos/uart/uart_com.c \
 bsp/freertos/lcd/bsp_lcd.c \
 bsp/freertos/touch/ctiic.c \
 bsp/freertos/touch/gt9147.c \
 bsp/freertos/touch/touch.c \
+bsp/freertos/spi/spi_flash.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
@@ -65,6 +66,8 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_nor.c \
+Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_spi.c \
+Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Src/system_stm32f4xx.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c \
@@ -160,6 +163,7 @@ C_INCLUDES =  \
 -Ibsp/freertos/lcd \
 -Ibsp/freertos/uart \
 -Ibsp/freertos/touch \
+-Ibsp/freertos/spi \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \

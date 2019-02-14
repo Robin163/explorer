@@ -13,9 +13,10 @@
 #include "usb_host.h"
 #include "bsp_led.h"
 #include "bsp_key.h"
-#include "bsp_uart.h"
+#include "uart_com.h"
 #include "bsp_lcd.h"
 #include "touch.h"
+#include "spi_flash.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -107,7 +108,9 @@ int main(void)
     /* Initialize all configured peripherals */
     LedConfig();
     KeyConfig();
-    UartConfig();
+    UartComConfig();
+
+    SpiFlashConfig();
 
     LCD_Init();
 	POINT_COLOR=RED;     			//画笔颜色：红色

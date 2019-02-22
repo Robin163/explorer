@@ -41,6 +41,9 @@ touch key Pin, driver GT9147
 +----+----------+----------+-----+---------+----------+-----+----------+---------+
 |PB1 |  output  |  T_PEN   |PC13 |output   | T_CS     |     |          |         |
 +----+----------+----------+-----+---------+----------+-----+----------+---------+
+2019年 02月 22日 星期五 11:23:34 CST
+1. update makefile (program debug release ....)
+
 2019年 01月 31日 星期四 11:03:01 CST
 1.touch key in lcd ok
 2.driver is GT9147 need update touch.c

@@ -15,7 +15,6 @@
 ######################################
 TARGET = explorer
 
-
 ######################################
 # building variables
 ######################################
@@ -201,7 +200,17 @@ LIBS = -lc -lm -lnosys
 LIBDIR =
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
-.PHONY: all clean program tar release
+#-------------------------------------
+# OpenOCD specific variables
+#-------------------------------------
+OOCD             = openocd
+OOCD_INTERFACE   = /usr/share/openocd/scripts/interface/jlink-swd.cfg
+OOCD_TARGET      = /usr/share/openocd/scripts/target/stm32f4x.cfg
+
+# Debug flags
+OOCDFLAGS := -f $(OOCD_INTERFACE) -f $(OOCD_TARGET)
+
+.PHONY: all clean debug program tar release style
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
@@ -241,6 +250,32 @@ $(BUILD_DIR):
 clean:
 	-rm -fR $(BUILD_DIR)
 
+#-------------------------------------
+# debug
+#-------------------------------------
+debug:
+	@printf "  GDB DEBUG $(BUILD_DIR)/$(TARGET).elf \n"
+	@ $(GDB) -iex 'target extended | $(OOCD) $(OOCDFLAGS) -c "gdb_port pipe"' \
+    -iex 'monitor reset halt' -ex 'load' -ex 'break main' -ex 'c' $(BUILD_DIR)/$(TARGET).elf
+
+#-------------------------------------
+# program(download the hex to memory)
+#-------------------------------------
+program:
+	$(OOCD) $(OOCDFLAGS) \
+	-c init -c halt -c "flash write_image erase $(BUILD_DIR)/$(TARGET).hex" -c reset -c shutdown
+
+#-------------------------------------
+# release the project
+#-------------------------------------
+release:
+	tar -jcvf ../backup/$(shell basename `pwd`)-`date +%Y%m%d`.tar.bz2 ./
+
+#-------------------------------------
+# format the source code
+#-------------------------------------
+style:
+	sh $(TOP)/build/style.sh
 #-------------------------------------
 # tar
 #-------------------------------------

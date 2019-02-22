@@ -87,7 +87,6 @@ typedef enum {
 typedef struct
 {
     uint8_t ( *IsKeyPressFunc )( void ); /* 按键按下的判断函数,1表示按下 */
-
     uint8_t  cnt;			/* 滤波器计数器 */
     uint16_t longCnt;		/* 长按计数器 */
     uint16_t longTime;		/* 按键按下持续时间, 0表示不检测长按 */
